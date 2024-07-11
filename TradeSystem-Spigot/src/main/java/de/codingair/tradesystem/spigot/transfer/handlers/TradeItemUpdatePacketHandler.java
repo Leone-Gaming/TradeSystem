@@ -16,7 +16,7 @@ public class TradeItemUpdatePacketHandler implements PacketHandler<TradeItemUpda
 
     @Override
     public void process(@NotNull TradeItemUpdatePacket packet, @NotNull Proxy proxy, @Nullable Object o, @NotNull Direction direction) {
-        ProxyTrade t = TradeSystem.proxy().getTrade(packet.getRecipient(), packet.getSender());
+        /*/ProxyTrade t = TradeSystem.proxy().getTrade(packet.getRecipient(), packet.getSender());
         if (t == null) return;
 
         try {
@@ -24,6 +24,6 @@ public class TradeItemUpdatePacketHandler implements PacketHandler<TradeItemUpda
             t.receiveItemData(packet.getSlotId(), ItemStackUtils.deserialize(data));
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+        }/*/
     }
 }
