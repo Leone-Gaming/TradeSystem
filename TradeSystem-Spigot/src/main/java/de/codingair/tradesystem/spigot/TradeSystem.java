@@ -3,7 +3,6 @@ package de.codingair.tradesystem.spigot;
 import de.codingair.codingapi.API;
 import de.codingair.codingapi.files.ConfigFile;
 import de.codingair.codingapi.files.FileManager;
-import de.codingair.codingapi.nms.NmsCheck;
 import de.codingair.codingapi.player.chat.ChatButtonManager;
 import de.codingair.codingapi.server.specification.Version;
 import de.codingair.codingapi.utils.Value;
@@ -41,7 +40,6 @@ import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.FileNotFoundException;
-import java.util.logging.Level;
 
 public class TradeSystem extends JavaPlugin implements Proxy {
     private static TradeSystem instance;
@@ -64,7 +62,6 @@ public class TradeSystem extends JavaPlugin implements Proxy {
     private TradeCMD tradeCMD;
 
     private boolean firstSetup;
-    private boolean workingNms = false;
     private YamlConfiguration oldConfig;
 
     public static void log(String message) {
@@ -98,8 +95,6 @@ public class TradeSystem extends JavaPlugin implements Proxy {
     @Override
     public void onEnable() {
         instance = this;
-        checkNms();
-
         API.getInstance().onEnable(this);
 
         printConsoleInfo(() -> {
@@ -135,12 +130,6 @@ public class TradeSystem extends JavaPlugin implements Proxy {
 
     @Override
     public void onDisable() {
-        if (!workingNms) {
-            getLogger().log(Level.SEVERE, "This Minecraft version does not seem to be supported yet. Please contact the author with the given error above.");
-            getLogger().log(Level.SEVERE, "Here's an invitation to the discord for support: https://discord.gg/DxKMcGjQbp");
-            return;
-        } else workingNms = false;
-
         API.getInstance().onDisable(this);
         Bukkit.getScheduler().cancelTasks(this);
 
@@ -188,11 +177,6 @@ public class TradeSystem extends JavaPlugin implements Proxy {
         log(" ");
         log("__________________________________________________________");
         log(" ");
-    }
-
-    private void checkNms() {
-        NmsCheck.test(new Class[0]);
-        workingNms = true;
     }
 
     private void loadManagers() {

@@ -36,7 +36,7 @@ public class RequestManager {
             if (InvitationManager.processInvitation(sender, null, invited)) return;
             sendRequest(sender, invited);
         } else {
-            request(sender, other, receiver);
+            request(sender, other);
         }
     }
 
@@ -48,10 +48,10 @@ public class RequestManager {
                 });
     }
 
-    public static void request(@NotNull Player sender, @Nullable Player other, String otherName) {
+    public static void request(@NotNull Player sender, @Nullable Player other) {
         if (other != null && !other.isOnline()) return; //npc
 
-        if (RuleManager.isViolatingRules(sender, other, otherName)) return;
+        if (RuleManager.isViolatingRules(sender, other)) return;
         assert other != null; //already sent a message if other == null
 
         //call event
@@ -83,11 +83,11 @@ public class RequestManager {
 
         SimpleMessage message = new SimpleMessage(recipient, base, TradeSystem.getInstance());
 
-        TextComponent accept = new TextComponent(Lang.get("Want_To_Trade_Accept", recipient, new Lang.P("player", player)));
+        TextComponent accept = new TextComponent(Lang.get("Want_To_Trade_Accept", recipient));
         accept.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, commandAccept + " " + player));
         accept.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new net.md_5.bungee.api.chat.BaseComponent[] {new TextComponent(Lang.get("Want_To_Trade_Hover", recipient))}));
 
-        TextComponent deny = new TextComponent(Lang.get("Want_To_Trade_Deny", recipient, new Lang.P("player", player)));
+        TextComponent deny = new TextComponent(Lang.get("Want_To_Trade_Deny", recipient));
         deny.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, commandDeny + " " + player));
         deny.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new net.md_5.bungee.api.chat.BaseComponent[] {new TextComponent(Lang.get("Want_To_Trade_Hover", recipient))}));
 

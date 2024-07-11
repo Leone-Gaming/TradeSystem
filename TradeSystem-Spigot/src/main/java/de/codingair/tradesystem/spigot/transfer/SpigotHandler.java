@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 
 public class SpigotHandler extends OneWayStreamDataHandler<Player> implements PluginMessageListener {
+
     public SpigotHandler(TradeSystem plugin) {
         super("tradesystem", plugin);
     }
@@ -39,28 +40,28 @@ public class SpigotHandler extends OneWayStreamDataHandler<Player> implements Pl
     }
 
     public void onEnable() {
-        Bukkit.getMessenger().registerOutgoingPluginChannel((TradeSystem) proxy, channelProxy);
-        Bukkit.getMessenger().registerIncomingPluginChannel((TradeSystem) proxy, channelBackend, this);
+        //Bukkit.getMessenger().registerOutgoingPluginChannel((TradeSystem) proxy, channelProxy);
+        //Bukkit.getMessenger().registerIncomingPluginChannel((TradeSystem) proxy, channelBackend, this);
 
-        if (!Bukkit.getOnlinePlayers().isEmpty()) send(new SynchronizePlayersPacket(), null);
+        //if (!Bukkit.getOnlinePlayers().isEmpty()) send(new SynchronizePlayersPacket(), null);
     }
 
     public void onDisable() {
-        Bukkit.getMessenger().unregisterOutgoingPluginChannel((TradeSystem) proxy, channelProxy);
-        Bukkit.getMessenger().unregisterIncomingPluginChannel((TradeSystem) proxy, channelBackend, this);
+        //Bukkit.getMessenger().unregisterOutgoingPluginChannel((TradeSystem) proxy, channelProxy);
+        //Bukkit.getMessenger().unregisterIncomingPluginChannel((TradeSystem) proxy, channelBackend, this);
     }
 
     @Override
     protected void send(byte[] data, Player p) {
-        if (p == null) p = getAny();
+        /*/if (p == null) p = getAny();
         if (p == null) return; //nobody online
 
-        p.sendPluginMessage(getProxy(), channelProxy, data);
+        p.sendPluginMessage(getProxy(), channelProxy, data);/*/
     }
 
     @Override
     public void onPluginMessageReceived(@NotNull String tag, @NotNull Player player, byte[] bytes) {
-        if (tag.equals(getChannelBackend())) receive(bytes, player);
+        //if (tag.equals(getChannelBackend())) receive(bytes, player);
     }
 
     private Player getAny() {

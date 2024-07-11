@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class SqLiteMigrations extends SqlMigrations {
     private static SqLiteMigrations instance;
@@ -22,12 +23,12 @@ public class SqLiteMigrations extends SqlMigrations {
     }
 
     @Override
-    public @NotNull Connection getConnection() throws Exception {
+    public @NotNull Connection getConnection() throws SQLException {
         return SqlLiteConnection.connect();
     }
 
     @Override
-    public void setVersion(@NotNull Connection connection, @NotNull String user, int version) throws Exception {
+    public void setVersion(@NotNull Connection connection, @NotNull String user, int version) throws SQLException {
         try (PreparedStatement stmt = connection.prepareStatement("INSERT INTO migrations VALUES (?, ?) ON CONFLICT(user) DO UPDATE SET version=?;")) {
             stmt.setString(1, user);
             stmt.setInt(2, version);

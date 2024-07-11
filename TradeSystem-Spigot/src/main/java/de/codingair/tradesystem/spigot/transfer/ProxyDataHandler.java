@@ -38,14 +38,14 @@ public class ProxyDataHandler implements PluginMessageListener {
     private String serverName = null;
 
     public void onEnable() {
-        Bukkit.getServer().getMessenger().registerIncomingPluginChannel(TradeSystem.getInstance(), "BungeeCord", this);
-        Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(TradeSystem.getInstance(), "BungeeCord");
-        checkForServerName();
+        //Bukkit.getServer().getMessenger().registerIncomingPluginChannel(TradeSystem.getInstance(), "BungeeCord", this);
+        //Bukkit.getServer().getMessenger().registerOutgoingPluginChannel(TradeSystem.getInstance(), "BungeeCord");
+        //checkForServerName();
     }
 
     public void onDisable() {
-        Bukkit.getServer().getMessenger().unregisterIncomingPluginChannel(TradeSystem.getInstance(), "BungeeCord", this);
-        Bukkit.getServer().getMessenger().unregisterOutgoingPluginChannel(TradeSystem.getInstance(), "BungeeCord");
+        //Bukkit.getServer().getMessenger().unregisterIncomingPluginChannel(TradeSystem.getInstance(), "BungeeCord", this);
+        //Bukkit.getServer().getMessenger().unregisterOutgoingPluginChannel(TradeSystem.getInstance(), "BungeeCord");
         this.players.clear();
     }
 
